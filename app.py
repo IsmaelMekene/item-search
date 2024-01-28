@@ -14,6 +14,12 @@ from constants import *
 
 from search import SearchItem
 
+from fastapi import FastAPI
+
+
+
+
+
 
 # initialize connection to pinecone (get API key at app.pinecone.io)
 api_key = PINECONE_API_KEY or os.getenv(PINECONE_API_KEY) # or "PINECONE_API_KEY"
@@ -75,7 +81,8 @@ def retrieve_image_from_image(image, query):
         return imgs
     
     except Exception as e:
-        print(f"Error processing image: {e}")
+        # print(f"Error processing image: {e}")
+        print(e)
         return None
 
 
@@ -115,4 +122,4 @@ with gr.Blocks() as demo:
         .then(fn=lambda image, query: retrieve_images(query, image), inputs=[button, textbox], outputs=[gallery])
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7000)
+    demo.launch(server_name="0.0.0.0", server_port=8000)
