@@ -7,7 +7,6 @@ from pinecone_text.sparse import BM25Encoder
 from datasets import load_dataset
 from sentence_transformers import SentenceTransformer
 import torch
-from IPython.core.display import HTML
 from io import BytesIO
 from base64 import b64encode
 from tqdm.auto import tqdm
