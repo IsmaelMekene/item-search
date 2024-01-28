@@ -1,5 +1,3 @@
-# item-search
-
 # Shopping Search Engine 
 
 ## Description
