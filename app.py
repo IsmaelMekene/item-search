@@ -23,7 +23,7 @@ env = PINECONE_ENVIRONMENT or os.getenv(PINECONE_ENVIRONMENT) # or "PINECONE_ENV
 fashion_processor = SearchItem(api_key, env)
     
 
-def retrieve_images(query: str, image=None):
+def retrieve_images(query, image=None):
     if image:
         # If image is provided, use retrieve_image_from_image function
         return retrieve_image_from_image(image, query)
@@ -33,7 +33,7 @@ def retrieve_images(query: str, image=None):
     
 
 
-def retrieve_image_from_query(query: str):
+def retrieve_image_from_query(query):
 
     # create sparse and dense vectors
     sparse = fashion_processor.bm25.encode_queries(query)
@@ -52,7 +52,7 @@ def retrieve_image_from_query(query: str):
     return imgs
 
 
-def retrieve_image_from_image(image, query: str):
+def retrieve_image_from_image(image, query):
 
     try:
         # create sparse and dense vectors
