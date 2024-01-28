@@ -4,23 +4,16 @@ from pinecone_text.sparse import BM25Encoder
 from datasets import load_dataset
 from sentence_transformers import SentenceTransformer
 import torch
-
 from IPython.core.display import HTML
 from io import BytesIO
 from base64 import b64encode
 from tqdm.auto import tqdm
-
-
-import gradio as gr
-
 from PIL import Image
-import io 
+import gradio as gr
+from constants import *
 
 from search import SearchItem
 
-
-PINECONE_API_KEY = '810e1b45-1489-41a8-998e-1ed0fb2d21a5'
-PINECONE_ENVIRONMENT = 'gcp-starter'
 
 # initialize connection to pinecone (get API key at app.pinecone.io)
 api_key = PINECONE_API_KEY or os.getenv(PINECONE_API_KEY) # or "PINECONE_API_KEY"

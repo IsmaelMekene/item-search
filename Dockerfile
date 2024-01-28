@@ -10,6 +10,8 @@ COPY search.py ./
 
 COPY app.py ./
 
+COPY constants.py ./
+
 # COPY . .
 
 ENTRYPOINT ["python", "app.py"]

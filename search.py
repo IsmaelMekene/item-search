@@ -10,10 +10,7 @@ from io import BytesIO
 from base64 import b64encode
 from tqdm.auto import tqdm
 
-
-
-PINECONE_API_KEY = '810e1b45-1489-41a8-998e-1ed0fb2d21a5'
-PINECONE_ENVIRONMENT = 'gcp-starter'
+from constants import *
 
 # initialize connection to pinecone (get API key at app.pinecone.io)
 api_key = PINECONE_API_KEY or os.getenv(PINECONE_API_KEY) # or "PINECONE_API_KEY"
