@@ -1,16 +1,19 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+
 import os
 from pinecone import Pinecone, ServerlessSpec
 from pinecone_text.sparse import BM25Encoder
 from datasets import load_dataset
 from sentence_transformers import SentenceTransformer
 import torch
-
 from IPython.core.display import HTML
 from io import BytesIO
 from base64 import b64encode
 from tqdm.auto import tqdm
-
 from constants import *
+
+
 
 # initialize connection to pinecone (get API key at app.pinecone.io)
 api_key = PINECONE_API_KEY or os.getenv(PINECONE_API_KEY) # or "PINECONE_API_KEY"
