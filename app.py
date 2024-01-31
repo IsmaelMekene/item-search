@@ -16,7 +16,6 @@ from constants import *
 
 from search import SearchItem
 
-from fastapi import FastAPI
 
 
 
@@ -59,10 +58,13 @@ def retrieve_image_from_query(query):
 
     return imgs
 
-
+    
 def retrieve_image_from_image(image, query):
 
     try:
+        if query is None:
+            query = 'No image'
+            
         # create sparse and dense vectors
         sparse = fashion_processor.bm25.encode_queries(query)
         w, h = 60, 80
@@ -98,17 +100,20 @@ with gr.Blocks() as demo:
     """
     # Shopping Search Engine
     
-    Look for the ideal clothing items 😎
+    Look for the ideal clothing items 😆
     """)
-    
+
+
     with gr.Row():
         with gr.Column():
 
             query = gr.Textbox(placeholder="Search Items")
-            gr.HTML("OR")
+            gr.HTML("OR LOAD IMAGE AND SPECIFIC TEXT DETAILS")
             photo = gr.Image()
             with gr.Row():
+                file_output = gr.File()
                 button = gr.UploadButton(label="Upload Image", file_types=["image"])
+                button.upload(show_img, button, file_output)
                 textbox = gr.Textbox(placeholder="Additional Details ?")
                 submit_button = gr.Button(text="Submit")
 
@@ -120,8 +125,59 @@ with gr.Blocks() as demo:
             )
 
     query.submit(fn=lambda query: retrieve_images(query), inputs=[query], outputs=[gallery])
+    
     submit_button.click(fn=lambda image, query: show_img(image), inputs=[button, textbox], outputs=[photo]) \
         .then(fn=lambda image, query: retrieve_images(query, image), inputs=[button, textbox], outputs=[gallery])
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=8000)
+    # demo.launch(server_name="0.0.0.0", server_port=8000)
+    demo.launch(share=True)
+
+
+
+
+
+
+
+
+# def is_submit_visible(image, textbox):
+#     return bool(image) and bool(textbox)
+
+# with gr.Blocks() as demo:
+#     gr.Markdown(
+#         """
+#         # Shopping Search Engine
+        
+#         Look for the ideal clothing items 😎
+#         """
+#     )
+
+#     with gr.Row():
+#         with gr.Column():
+
+#             query = gr.Textbox(placeholder="Search Items")
+#             gr.HTML("OR")
+#             photo = gr.Image()
+#             with gr.Row():
+#                 file_output = gr.File()
+#                 button = gr.UploadButton(label="Upload Image", file_types=["image"])
+#                 button.upload(show_img, button, file_output)
+#                 textbox = gr.Textbox(placeholder="Additional Details ?")
+#                 submit_button = gr.Button(text="Submit").style(display='none')
+
+#         with gr.Column():
+#             gallery = gr.Gallery().style(
+#                 object_fit='contain',
+#                 height='auto',
+#                 preview=True
+#             )
+
+#     query.submit(fn=lambda query: retrieve_images(query), inputs=[query], outputs=[gallery])
+
+#     submit_button.click(fn=lambda image, textbox: show_img(image), inputs=[button, textbox], outputs=[photo]) \
+#         .then(fn=lambda image, textbox: retrieve_images(query, image), inputs=[button, textbox], outputs=[gallery])
+
+#     gr.Conditional(is_submit_visible, inputs=[file_output, textbox], outputs=[submit_button])
+
+# if __name__ == "__main__":
+#     demo.launch(share=True)
