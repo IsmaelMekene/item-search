@@ -46,8 +46,9 @@ docker run -it -d --name item-search-engine -p 7000:7000  item-search:latest
 
 ## Author
 
-[Ismael C.](https://ismaelmekene.com)
-[GoogleColab](https://colab.research.google.com/drive/12oPiP2oKbww5LxLUeHup9YpwEh5ZtJOH?usp=sharing)
+Check out my website [Ismael C.](https://ismaelmekene.com)
+
+Run the app faster through a [Google Colab Notebook](https://colab.research.google.com/drive/12oPiP2oKbww5LxLUeHup9YpwEh5ZtJOH?usp=sharing)
 
 ## License
 
